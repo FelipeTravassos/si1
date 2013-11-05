@@ -1,0 +1,58 @@
+package sistema;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SistemaEscreveNumero {
+
+	public String getNumeroEscrito(int numero) {
+		String retorno = "";
+		
+		if((numero+"").length() == 1){
+			retorno = umDigito(numero);
+		}else if((numero+"").length() >= 2){
+			retorno = escreve(numero+"");
+		}
+		return retorno;
+	}
+	
+	private String escreve(String numero){
+		List<String> numeroQuebrado = new ArrayList<String>();
+		String 
+		for (String unidade : numero.split("")) {
+			if(unidade != "")
+				numeroQuebrado.add(unidade);
+		}
+		
+		return "";	
+	}
+	
+	private String umDigito(int numero){
+		switch (numero) {
+		case 0:
+			return "zero";
+		case 1:
+			return "um";
+		case 2:
+			return "dois";
+		case 3:
+			return "tres";
+		case 4:
+			return "quatro";
+		case 5:
+			return "cinco";
+		case 6:
+			return "seis";
+		case 7:
+			return "sete";
+		case 8:
+			return "oito";
+		case 9:
+			return "nove";
+
+		default:
+			return null;
+		}
+	}
+
+}
