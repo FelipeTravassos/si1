@@ -1,0 +1,62 @@
+package tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import sistema.SistemaEscreveNumero;
+
+public class TesteSistema {
+	SistemaEscreveNumero sistema = new SistemaEscreveNumero();
+
+	@Test
+	public void testNumerosEntre0e20() {
+		
+		assertEquals(sistema.getNumeroEscrito("10"), "dez");
+		assertEquals(sistema.getNumeroEscrito("15"), "quinze");
+		assertEquals(sistema.getNumeroEscrito("0"), "zero");
+		assertEquals(sistema.getNumeroEscrito("20"), "vinte");
+		assertEquals(sistema.getNumeroEscrito("7"), "sete");
+	
+	}
+	
+	@Test
+	public void testNumeroInvalido(){
+
+		assertEquals(sistema.getNumeroEscrito(""), "");
+		assertEquals(sistema.getNumeroEscrito("xpto"), "ERRO: Deve ser informado um número");
+			
+	}
+
+	@Test
+	public void testNumerosEntre21e99(){
+		
+		assertEquals(sistema.getNumeroEscrito("21"), "vinte e um");
+		assertEquals(sistema.getNumeroEscrito("26"), "vinte e seis");
+		assertEquals(sistema.getNumeroEscrito("80"), "oitenta");
+		assertEquals(sistema.getNumeroEscrito("74"), "setenta e quatro");
+		assertEquals(sistema.getNumeroEscrito("99"), "noventa e nove");
+	}
+	
+	@Test
+	public void testNumerosEntre101e999(){
+		
+		assertEquals(sistema.getNumeroEscrito("101"), "cento e um");
+		assertEquals(sistema.getNumeroEscrito("326"), "trezentos e vinte e seis");
+		assertEquals(sistema.getNumeroEscrito("800"), "oitocentos");
+		assertEquals(sistema.getNumeroEscrito("176"), "cento e setenta e seis");
+		assertEquals(sistema.getNumeroEscrito("740"), "setecentos e quarenta");
+		assertEquals(sistema.getNumeroEscrito("999"), "novecentos e noventa e nove");
+	}
+	
+	@Test
+	public void testNumerosEntre1001e1999(){
+
+		assertEquals(sistema.getNumeroEscrito("1001"), "um mil e um");
+		assertEquals(sistema.getNumeroEscrito("3296"), "tres mil duzentos e noventa e seis");
+		assertEquals(sistema.getNumeroEscrito("8010"), "oito mil e dez");
+		assertEquals(sistema.getNumeroEscrito("1706"), "um mil setecentos e seis");
+		assertEquals(sistema.getNumeroEscrito("7040"), "sete mil e quarenta");
+		assertEquals(sistema.getNumeroEscrito("1999"), "um mil novecentos e noventa e nove");
+	}
+}

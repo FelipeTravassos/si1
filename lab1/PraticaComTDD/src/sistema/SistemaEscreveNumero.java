@@ -5,63 +5,248 @@ import java.util.List;
 
 public class SistemaEscreveNumero {
 
-	public String getNumeroEscrito(int numero) {
+	public String getNumeroEscrito ( String numeroStr ) {
 		String retorno = "";
 		
-		if((numero+"").length() == 1){
-			retorno = umDigito(numero);
-		}else if((numero+"").length() >= 2){
-			retorno = escreve(numero+"");
+		if(numeroStr.equals("")) 
+			return retorno;
+		int numero;
+		
+		try{
+			numero = Integer.parseInt(numeroStr);
+		}catch(IllegalArgumentException e){
+			return "ERRO: Deve ser informado um número";				
+		}
+		
+		if ( numero < 0) {
+			
+		}
+		else if ( numero > 1000000000 ) {
+			
+		}
+		else if ( numero == 1000000000 ){
+			return "um bilhão";
+		}
+		else if ( numero == 0 ){
+			retorno = "zero";
+		}
+		else {
+			ArrayList<String> grupos = (ArrayList) separaGruposDeTres ( numero + "" );
+			
+			retorno += centena(grupos.get(2));
+			boolean colocado = false;
+			
+			if(Integer.parseInt(inverte(grupos.get(2))) > 1)
+				retorno += " milhões ";
+			else if(Integer.parseInt(inverte(grupos.get(2))) == 1)
+				retorno += " milhão ";
+			
+			if(Integer.parseInt(grupos.get(1)) > 0 && Integer.parseInt(grupos.get(0)) == 0 
+					&& !colocado && retorno.length() > 0){
+				colocado = true;
+				retorno += " e ";
+			}
+			
+			retorno += centena(grupos.get(1));
+			
+			if(Integer.parseInt(grupos.get(1)) > 0)
+				retorno += " mil ";
+			
+			if(Integer.parseInt(grupos.get(0)) > 0 && !colocado 
+					&& retorno.length() > 0 && ((Integer.parseInt(inverte(grupos.get(0))) % 100) == 0 
+					|| Integer.parseInt(inverte(grupos.get(0))) < 100 )){
+				colocado = true;
+				retorno += " e ";
+			}
+			
+			retorno += centena(grupos.get(0));
+			
+			
+		}
+		
+		return retorno.replace("  ", " ");
+	}
+	
+	private String inverte(String numero){
+		StringBuffer ctg = new StringBuffer(numero);  
+        ctg.reverse();
+		
+		return ctg+"";
+	}
+	
+	private String centena ( String numero ) {
+		String retorno = "";
+		String[] numeros = separaGruposDeUm ( numero );
+		
+		int numeroUm = Integer.parseInt(numeros[0]);
+		int numeroDois = Integer.parseInt(numeros[1]);
+		int numeroTres = Integer.parseInt(numeros[2]);
+		
+		if ( numeroTres == 1){
+			 if(numeroUm == 0 && numeroDois == 0)
+				 retorno+= "cem";
+			 else 
+				 retorno += "cento"; 
+		}else if ( numeroTres == 2){
+			retorno+= "duzentos";
+		}else if ( numeroTres == 3){
+			retorno+= "trezentos";
+		}else if ( numeroTres == 4){
+			retorno+= "quatrocentos";
+		}else if ( numeroTres == 5){
+			retorno+= "quinhentos";
+		}else if ( numeroTres == 6){
+			retorno+= "seiscentos";
+		}else if ( numeroTres == 7){
+			retorno+= "setecentos";
+		}else if ( numeroTres == 8){
+			retorno+= "oitocentos";
+		}else if ( numeroTres == 9){
+			retorno+= "novecentos";
+		}
+				
+		if(numeroTres != 0 && (numeroUm != 0 || numeroDois != 0)){
+			retorno += " e ";
+		}	
+		
+		if ( numeroDois == 0 && numeroUm != 0) 
+		{
+			retorno += umaUnidade(numeroUm);
+		}
+		else
+		{
+			retorno += dezena(numeroDois, numeroUm);
+		}
+		
+		return retorno;
+	}
+	
+	private String dezena(int numeroDois, int numeroUm) {
+		String retorno = "";
+		
+		if(numeroDois == 1){
+			if(numeroUm == 0){
+				retorno += "dez";
+			}
+			else if(numeroUm == 1){
+				retorno += "onze";
+			}
+			else if(numeroUm == 2){
+				retorno += "doze";
+			}
+			else if(numeroUm == 3){
+				retorno += "treze";
+			}
+			else if(numeroUm == 4){
+				retorno += "quatorze";
+			}
+			else if(numeroUm == 5){
+				retorno += "quinze";
+			}
+			else if(numeroUm == 6){
+				retorno += "dezesseis";
+			}
+			else if(numeroUm == 7){
+				retorno += "dezessete";
+			}
+			else if(numeroUm == 8){
+				retorno += "dezoito";
+			}
+			else if(numeroUm == 9){
+				retorno += "dezenove";
+			}
+		}else if(numeroDois == 2){
+			retorno += "vinte";	
+		}else if(numeroDois == 3){
+			retorno += "trinta";	
+		}else if(numeroDois == 4){
+			retorno += "quarenta";	
+		}else if(numeroDois == 5){
+			retorno += "cinquenta";	
+		}else if(numeroDois == 6){
+			retorno += "sessenta";	
+		}else if(numeroDois == 7){
+			retorno += "setenta";	
+		}else if(numeroDois == 8){
+			retorno += "oitenta";	
+		}else if(numeroDois == 9){
+			retorno += "noventa";	
+		}
+		
+		
+		if ( numeroDois != 0 && numeroDois != 1 && numeroUm != 0 ) {
+			retorno += " e ";
+		}
+		if ( numeroUm != 0 && numeroDois != 1) {
+			retorno += umaUnidade(numeroUm);
 		}
 		return retorno;
 	}
 	
-	private String escreve(String numero){
-		List<String> numeroQuebrado = new ArrayList<String>();
-		String parte = "";
-		int cont = 0;
+	private String umaUnidade(int numero){
+		String retorno = "";
+		if(numero == 0){
+			retorno = "zero";
+		}else if(numero == 1){
+			retorno = "um";
+		}else if(numero == 2){
+			retorno = "dois";
+		}else if(numero == 3){
+			retorno = "tres";
+		}else if(numero == 4){
+			retorno = "quatro";
+		}else if(numero == 5){
+			retorno = "cinco";
+		}else if(numero == 6){
+			retorno = "seis";
+		}else if(numero == 7){
+			retorno = "sete";
+		}else if(numero == 8){
+			retorno = "oito";
+		}else if(numero == 9){
+			retorno = "nove";
+		}
 		
-		for (String unidade : numero.split("")) {
-			if(unidade != ""){
-				parte+= unidade;
+		return retorno;
+	}
+	
+	private String[] separaGruposDeUm (String numero) {
+		String[] grupos = new String[3];
+		String[] arrayNumero = numero.split("");
+		int indice = 0;
+		for (String unidade : arrayNumero) {
+			if(!unidade.equals(""))
+				grupos[indice++] = unidade;
+		}
+		return grupos;
+	}
+	
+	private List < String > separaGruposDeTres ( String numero ) {
+		
+		while(numero.length() < 9){
+			numero = 0+numero;
+		}
+		
+		List<String> grupos = new ArrayList<String>();
+		String[] arrayNumero = numero.split("");
+		int cont = 0; 
+		String sub = "";
+		
+		for (int i = arrayNumero.length-1 ; i >= 0 ; i-- ) {
+			if ( !arrayNumero[i].equals("") ) {
+				sub+= arrayNumero[i];
 				cont++;
-				if(cont == 2){
-					numeroQuebrado.add(parte);
-					parte = "";
-					cont = 0;
-				}
+			}	
+			if ( cont == 3 ) {
+				grupos.add( sub );
+				cont = 0;
+				sub = "";
 			}
 		}
 		
-		return "";	
+		return grupos;
+		
 	}
 	
-	private String umDigito(int numero){
-		switch (numero) {
-		case 0:
-			return "zero";
-		case 1:
-			return "um";
-		case 2:
-			return "dois";
-		case 3:
-			return "tres";
-		case 4:
-			return "quatro";
-		case 5:
-			return "cinco";
-		case 6:
-			return "seis";
-		case 7:
-			return "sete";
-		case 8:
-			return "oito";
-		case 9:
-			return "nove";
-
-		default:
-			return null;
-		}
-	}
 
 }

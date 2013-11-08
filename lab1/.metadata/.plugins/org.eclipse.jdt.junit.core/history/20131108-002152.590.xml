@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TesteSistema" project="PraticaComTDD" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="tests.TesteSistema" time="0.0">
+    <testcase name="testNumerosEntre21e99" classname="tests.TesteSistema" time="0.0"/>
+    <testcase name="testNumeroInvalido" classname="tests.TesteSistema" time="0.0"/>
+    <testcase name="testNumerosEntre0e20" classname="tests.TesteSistema" time="0.0"/>
+    <testcase name="testNumerosEntre101e999" classname="tests.TesteSistema" time="0.0"/>
+  </testsuite>
+</testrun>

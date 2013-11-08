@@ -1,0 +1,107 @@
+package sistema;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SistemaEscreveNumero {
+
+	public String getNumeroEscrito(int numero) {
+		String retorno = "";
+	
+		separaGruposDeTres(numero+"");
+		return retorno;
+	}
+	
+	private String grupoUm(String numero){
+		String retorno = "";
+		String[] numeros = separaGruposDeUm(numero);
+		switch (Integer.parseInt(numeros[2])) {
+			case 0:
+				return "zero";
+			case 1:
+				return "um";
+			case 2:
+				return "dois";
+			case 3:
+				return "tres";
+			case 4:
+				return "quatro";
+			case 5:
+				return "cinco";
+			case 6:
+				return "seis";
+			case 7:
+				return "sete";
+			case 8:
+				return "oito";
+			case 9:
+				return "nove";
+
+		default:
+			break;
+		}
+		
+		return retorno;
+	}
+	
+	private String[] separaGruposDeUm (String numero) {
+		String[] grupos = new String[3]();
+		String[] arrayNumero = numero.split("");
+		int indice = 0;
+		for (String unidade : arrayNumero) {
+			if(!unidade.equals(""))
+				grupos[indice++] = unidade;
+		}
+		return grupos;
+	}
+	
+	private List<String> separaGruposDeTres (String numero) {
+		List<String> grupos = new ArrayList<String>();
+		String[] arrayNumero = numero.split("");
+		int cont = 0;
+		String sub = "";
+		for (int i = arrayNumero.length-1; i >= 0; i--) {
+			if(!arrayNumero[i].equals("")){
+				sub+= arrayNumero[i];
+				cont++;
+			}	
+			if(cont == 3){
+				grupos.add(sub);
+				cont = 0;
+				sub = "";
+			}
+		}
+		if(sub.length() > 0)
+			grupos.add(sub);
+		
+		return grupos;
+	}
+	private String umaUnidade(int numero){
+		switch (numero) {
+		case 0:
+			return "zero";
+		case 1:
+			return "um";
+		case 2:
+			return "dois";
+		case 3:
+			return "tres";
+		case 4:
+			return "quatro";
+		case 5:
+			return "cinco";
+		case 6:
+			return "seis";
+		case 7:
+			return "sete";
+		case 8:
+			return "oito";
+		case 9:
+			return "nove";
+
+		default:
+			return null;
+		}
+	}
+
+}

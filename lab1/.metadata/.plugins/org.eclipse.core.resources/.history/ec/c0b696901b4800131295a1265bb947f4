@@ -1,0 +1,31 @@
+package tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import sistema.SistemaEscreveNumero;
+
+public class TesteSistema {
+	SistemaEscreveNumero sistema = new SistemaEscreveNumero();
+
+	@Test
+	public void testMaisSimplesPossivel() {
+		
+		assertEquals(sistema.getNumeroEscrito("10"), "dez");
+		assertEquals(sistema.getNumeroEscrito("9"), "nove");
+		assertEquals(sistema.getNumeroEscrito("0"), "zero");
+		assertEquals(sistema.getNumeroEscrito("5"), "cinco");
+		assertEquals(sistema.getNumeroEscrito("7"), "sete");
+	
+	}
+	
+	@Test
+	public void testNumeroInvalido(){
+
+		assertEquals(sistema.getNumeroEscrito(""), "");
+		assertEquals(sistema.getNumeroEscrito("xpto"), "ERRO: Deve ser informado um número");
+			
+	}
+
+}

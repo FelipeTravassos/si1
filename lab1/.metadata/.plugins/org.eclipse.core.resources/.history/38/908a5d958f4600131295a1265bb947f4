@@ -1,0 +1,29 @@
+package tests;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import sistema.SistemaEscreveNumero;
+
+public class TesteSistema {
+
+	@Test
+	public void testMaisSimplesPOssivel() {
+		SistemaEscreveNumero sistema = new SistemaEscreveNumero();
+		sistema.getNumeroEscrito(10);
+		sistema.getNumeroEscrito(9);
+		sistema.getNumeroEscrito(547);
+		sistema.getNumeroEscrito(23457);
+//		assertEquals(sistema.getNumeroEscrito(10), "dez");
+//		assertEquals(sistema.getNumeroEscrito(9), "nove");
+//		assertEquals(sistema.getNumeroEscrito(547), "sete");
+//		assertEquals(sistema.getNumeroEscrito(23457), "sete");
+//		assertEquals(sistema.getNumeroEscrito(0), "zero");
+//		assertEquals(sistema.getNumeroEscrito(5), "cinco");
+//		assertEquals(sistema.getNumeroEscrito(7), "sete");
+	}
+	
+
+
+}
