@@ -12,6 +12,6 @@ public class Application extends Controller {
     }
  
     public static Result helloWorld() {
-        return ok(pagina.render("ihuuuu."));
+        return ok(pagina.render("ihuuuu.", 1));
     }
 }
